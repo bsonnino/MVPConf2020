@@ -1,0 +1,82 @@
+﻿<UserControl
+    x:Class="VisualizaClientesUWP.ClientesView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:VisualizaClientesUWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="800"
+    d:DesignWidth="1024" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="País" VerticalAlignment="Center" Margin="5"/>
+            <TextBox VerticalAlignment="Center" Margin="5,3" Width="250" Text="{Binding SearchText, Mode=TwoWay}"  />
+            <Button Content="Pesquisa" Width="75" Margin="10,5" VerticalAlignment="Center" 
+                    Command="{Binding SearchCommand}" />
+        </StackPanel>
+        <SplitView IsPaneOpen="True" DisplayMode="Inline" OpenPaneLength="600" Grid.Row="1">
+            <SplitView.Pane>
+                <controls:DataGrid AutoGenerateColumns="False" Grid.Row="1" ItemsSource="{Binding Clientes}" 
+                          SelectedItem="{Binding SelectedCliente, Mode=TwoWay}" >
+                    <controls:DataGrid.Columns>
+                        <controls:DataGridTextColumn Binding="{Binding Path=CustomerId}" Header="Cliente ID" Width="80" />
+                        <controls:DataGridTextColumn Binding="{Binding Path=CompanyName}" Header="Companhia" Width="300" />
+                        <controls:DataGridTextColumn Binding="{Binding Path=City}" Header="Cidade" Width="100" />
+                        <controls:DataGridTextColumn Binding="{Binding Path=Country}" Header="País" Width="100" />
+                    </controls:DataGrid.Columns>
+                </controls:DataGrid>
+            </SplitView.Pane>
+            <Grid DataContext="{Binding SelectedCliente}" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="Cliente Id:" Grid.Column="0" Grid.Row="0"  Margin="3" VerticalAlignment="Center" />
+                <TextBox Grid.Column="1" Grid.Row="0"   Margin="3" Text="{Binding Path=CustomerId, Mode=TwoWay}" VerticalAlignment="Center"  />
+                <TextBlock Text="Companhia:" Grid.Column="0" Grid.Row="1"  Margin="3" VerticalAlignment="Center" />
+                <TextBox Grid.Column="1" Grid.Row="1"   Margin="3" Text="{Binding Path=CompanyName, Mode=TwoWay}" VerticalAlignment="Center"  />
+                <TextBlock Text="Contato:" Grid.Column="0" Grid.Row="2"  Margin="3" VerticalAlignment="Center" />
+                <TextBox Grid.Column="1" Grid.Row="2"   Margin="3" Text="{Binding Path=ContactName, Mode=TwoWay}" VerticalAlignment="Center"  />
+                <TextBlock Text="Cargo Contato:" Grid.Column="0" Grid.Row="3"  Margin="3" VerticalAlignment="Center" />
+                <TextBox Grid.Column="1" Grid.Row="3"   Margin="3" Text="{Binding Path=ContactTitle, Mode=TwoWay}" VerticalAlignment="Center"  />
+                <TextBlock Text="Endereço:" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+                <TextBox Grid.Column="1" Grid.Row="4" Margin="3" Text="{Binding Path=Address, Mode=TwoWay}" VerticalAlignment="Center" />
+                <TextBlock Text="Cidade:" Grid.Column="0" Grid.Row="5"  Margin="3" VerticalAlignment="Center" />
+                <TextBox Grid.Column="1" Grid.Row="5"   Margin="3" Text="{Binding Path=City, Mode=TwoWay}" VerticalAlignment="Center"  />
+                <TextBlock Text="Código Postal:" Grid.Column="0" Grid.Row="6"  Margin="3" VerticalAlignment="Center" />
+                <TextBox Grid.Column="1" Grid.Row="6"   Margin="3" Text="{Binding Path=PostalCode, Mode=TwoWay}" VerticalAlignment="Center"  />
+                <TextBlock Text="País:" Grid.Column="0" Grid.Row="8"  Margin="3" VerticalAlignment="Center" />
+                <TextBox Grid.Column="1" Grid.Row="8"   Margin="3" Text="{Binding Path=Country, Mode=TwoWay}" VerticalAlignment="Center"  />
+                <TextBlock Text="Telefone:" Grid.Column="0" Grid.Row="9"  Margin="3" VerticalAlignment="Center" />
+                <TextBox Grid.Column="1" Grid.Row="9"   Margin="3" Text="{Binding Path=Phone, Mode=TwoWay}" VerticalAlignment="Center"  />
+                <TextBlock Text="Fax:" Grid.Column="0" Grid.Row="10"  Margin="3" VerticalAlignment="Center" />
+                <TextBox Grid.Column="1" Grid.Row="10"   Margin="3" Text="{Binding Path=Fax, Mode=TwoWay}" VerticalAlignment="Center"  />
+            </Grid>
+        </SplitView>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5" Grid.Row="2">
+            <Button Width="75" Margin="5" Content="Adiciona" Command="{Binding AddCommand}" />
+            <Button Width="75" Margin="5" Content="Remove" Command="{Binding RemoveCommand}" />
+            <Button Width="75" Margin="5" Content="Salva" Command="{Binding SaveCommand}" />
+        </StackPanel>
+    </Grid>
+</UserControl>
